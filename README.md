@@ -1,4 +1,4 @@
-Collaboration project with Charlie Condon - VUMC intern.
+Collaboration project with Charlie Condon <ccondon@vols.utk.edu> - VUMC intern.
 
 # Annovar_Whitelist_Filter_WDL
 
