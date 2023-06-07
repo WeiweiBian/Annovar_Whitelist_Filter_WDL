@@ -1,6 +1,6 @@
 library(data.table, quietly=T)
 gList<-fread("NEJM_2017_genes_01262020.txt")
-whitelist.mis<-fread("CHIP_missense_vars_agb_01262020.txt")
+whitelist.mis<-fread("CHIP_missense_vars_cv_04102022.txt")
 whitelist.splice<-fread("CHIP_splice_vars_agb_01262020.txt")
 whitelist.LoF<-fread("CHIP_nonsense_FS_vars_agb_01262020.txt")
 
@@ -65,7 +65,7 @@ varsOI.func[vmis&vmis_wl,"whitelist"]=T
 varsOI.func[vmis&vmis_wl,"wl.mis"]=T
 
 #2) Handle LoF and frame shift vars
-vlof<-grepl("X",varsOI.func$NonsynOI, fixed=T) #stop gain or stop loss
+vlof<-grepl("X|\\*",varsOI.func$NonsynOI) #stop gain or stop loss
 vFS<-grepl("fs",varsOI.func$NonsynOI, fixed=T) #frameshift
 vLOFgene<-varsOI.func$Gene.refGene%in%whitelist.LoF$Gene #genes are Lof Genes
 varsOI.func[(vlof|vFS)&vLOFgene,"whitelist"]=T
@@ -176,7 +176,7 @@ for(i in CBLBidx){
 
 #5) flag remaining exceptions for manual review
 
-vlof<-grepl("X",varsOI.func$NonsynOI, fixed=T) #stop gain or stop loss
+vlof<-grepl("X|\\*",varsOI.func$NonsynOI, fixed=T) #stop gain or stop loss
 vFS<-grepl("fs",varsOI.func$NonsynOI, fixed=T) #frameshift
 vSplice<-grepl("splicing",varsOI.func$Func.refGene)
 
@@ -217,7 +217,7 @@ varsOI.func[(varsOI.func$ExonicFunc.refGene=="frameshift deletion"|
                varsOI.func$ExonicFunc.refGene=="frameshift insertion")
             &(varsOI.func$Gene.refGene=="NPM1"),"manualreview"]=T
 
-# Removed length of protein code 
+# Removed length of protein code
 
 # Columns to be removed if they exist
 if ("aalen" %in% colnames(varsOI.func)) {
