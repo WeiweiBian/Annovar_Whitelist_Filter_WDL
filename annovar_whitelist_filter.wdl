@@ -141,8 +141,8 @@ task Annovar {
     }
 
     output {
-      File annovar_output_file_vcf = file_prefix + ".hg38_multianno.vcf"
-      File annovar_output_file_table = file_prefix + ".hg38_multianno.txt"
+      File annovar_output_file_vcf = file_prefix + "."+ ${ref_name} +"_multianno.vcf"
+      File annovar_output_file_table = file_prefix + "."+ ${ref_name} + "_multianno.txt"
     }
 }
 
