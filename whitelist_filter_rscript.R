@@ -6,7 +6,7 @@ whitelist.LoF<-fread("CHIP_nonsense_FS_vars_agb_01262020.txt")
 
 args <- commandArgs(trailingOnly=TRUE)
 sample_id<-args[2]
-vars1<-fread(paste(sample_id, ".annovar_out.hg38_multianno.txt", sep = ""))
+vars1<-fread(paste(sample_id, ".annovar_out.hg19_multianno.txt", sep = ""))
 vars<-transform(vars1, Sample=sample_id)
 
 colnames=c("Chr","Start","End","Ref","Alt","Func.refGene","Gene.refGene","GeneDetail.refGene","ExonicFunc.refGene","AAChange.refGene")
