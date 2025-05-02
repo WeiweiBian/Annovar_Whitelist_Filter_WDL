@@ -21,7 +21,7 @@ varsOI.func<-varsOI[Gene.refGene%in%gList$Gene&
                          grepl("splicing",varsOI$Func.refGene,fixed=T)),]
 varsOI.func<-merge(varsOI.func,gList[,c("Gene", "Accession")],by.x="Gene.refGene", by.y="Gene")
 
-
+print(1)
 #Func.refGene # (exonic, splicing or some wierd merged combination)
 #GeneDetail.refGene # NM_017940:exon16:c.1380-2A>G
 #ExonicFunc.refGene #"nonsynonymous SNV"
@@ -35,7 +35,7 @@ extractTranscript<-function(GeneDetail,AAChange,Accession){
       return("nan")}
   }
 }
-
+print(2)
 #Apply function
 aa<-apply(varsOI.func[,c('GeneDetail.refGene', 'AAChange.refGene','Accession')],
           1, function(x) {extractTranscript(x[1],x[2],x[3]) })
@@ -53,7 +53,7 @@ bb<-apply(varsOI.func[,c('transcriptOI')],1, function(x) {extractNonsyn(x[1]) })
 bb2<-lapply(bb, `[[`, 1)
 varsOI.func$NonsynOI<-unlist(bb2)
 rm(bb,bb2)
-
+print(3)
 #Annotate and filter
 varsOI.func<-transform(varsOI.func,whitelist=F,
                        wl.mis=F,wl.lof=F,wl.splice=F,wl.exception=F,
